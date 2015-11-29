@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block jumbotron %}
+<h1>Resultados</h1>
+<p>Veja o que os usuários do RU acharam do cardápio de hoje</p>
+{% endblock %}
+
+{% block content %}
+<center><p>Número de participações até o momento: <strong>{{ data.count }}</strong></p></center>
+<div class="row">
+    <div class="col-md-5 col-md-1-offset">
+        <h2>Opiniões</h2>
+        <ul>
+            <li>{{data.likes.loved}} <strong>Amei</strong></li>
+            <li>{{data.likes.liked}} <strong>Gostei</strong></li>
+            <li>{{data.likes.neutral}} <strong>Estou neutro</strong></li>
+            <li>{{data.likes.disliked}} <strong>Não gostei</strong></li>
+            <li>{{data.likes.hated}} <strong>Odiei</strong></li>
+        </ul>
+    </div>
+    <div class="col-md-5 text-center">
+        <h2>Comentários</h2>
+        <hr>
+        {% for comment in data.comments %}
+        <p>{{comment}}</p>
+        <hr>
+        {% endfor %}
+        <!-- <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p> -->
+    </div>
+</div>
+{% endblock %}
