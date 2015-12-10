@@ -50,7 +50,7 @@ class EnquetesResource(Resource):
         return answer.to_json()
 
 
-class SingleEnqueteResource(Resource):
+class MealEnqueteResource(Resource):
 
     def get(self, date, meal):
         answer = Answer()
@@ -62,6 +62,59 @@ class SingleEnqueteResource(Resource):
             answer.status = 1
         else:
             answer.status = 0
+
+        return answer.to_json()
+
+
+class TotalEnqueteResource(Resource):
+
+    def get(self):
+        answer = Answer()
+        totalEnquetesAnswers = []
+        enquetes = Enquete.query.all()
+        for enquete in enquetes:
+            data = None
+            data = enquete.to_json()
+            for enqueteAnswers in data['answers']:
+                totalEnquetesAnswers.append(enqueteAnswers)
+
+        answer.content = totalEnquetesAnswers;
+
+
+        return answer.to_json()
+
+
+class DateEnqueteResource(Resource):
+
+    def get(self, date):
+        answer = Answer()
+        totalEnquetesAnswers = []
+        converted_date = datetime.datetime.strptime(str(date) + " 00:00:00", "%Y-%m-%d %H:%M:%S")
+        possibleMeals = [
+            1, 2, 3
+        ]
+
+        for meal in possibleMeals:
+            enquete = Enquete.query.find_by_meal(converted_date, meal)
+            data = None
+            if enquete is not None:
+                data = enquete.to_json()
+                for enqueteAnswers in data['answers']:
+                    totalEnquetesAnswers.append(enqueteAnswers)
+            else:
+                data = None
+
+            answer.content.update({
+                meal: data
+            })
+
+        answer.content.update({
+            0: {
+                'answers': totalEnquetesAnswers,
+                'meal': 0
+            }
+        })
+
 
         return answer.to_json()
 

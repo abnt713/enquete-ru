@@ -10,11 +10,11 @@ class Meal:
         after_start = time >= self.init_time
         before_finish = time < self.end_time
         return after_start and before_finish
-        
+
 
 class BreakfastMeal(Meal):
-    init_time = datetime.time(15, 30, 0)
-    end_time = datetime.time(16, 0, 0)
+    init_time = datetime.time(4, 0, 0)
+    end_time = datetime.time(6, 0, 0)
 
 
 class LunchMeal(Meal):
@@ -23,8 +23,8 @@ class LunchMeal(Meal):
 
 
 class DinnerMeal(Meal):
-    init_time = datetime.time(17, 0, 0)
-    end_time = datetime.time(19, 0, 0)
+    init_time = datetime.time(1, 0, 0)
+    end_time = datetime.time(4, 0, 0)
 
 
 class MealChecker:
@@ -38,6 +38,7 @@ class MealChecker:
         }
 
         time = datetime.time(datetime_value.hour, datetime_value.minute, datetime_value.second)
+        print(time)
         selected = None
         for key, meal in meals.iteritems():
             if meal.check_time(time) == True:

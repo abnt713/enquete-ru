@@ -24,6 +24,7 @@ class EnqueteQuery(BaseQuery):
         timedelta = datetime.timedelta(days=1)
         enquetes = self.filter(self.type.date >= date, self.type.date < (date + timedelta)).all()
         for enquete in enquetes:
+            print('Found enquete ' + str(enquete.get_meal()));
             int_meal = int(meal)
             # print(str(int_meal) + " = " + enquete.get_meal() + " ?")
             if enquete.get_meal() == int_meal:
