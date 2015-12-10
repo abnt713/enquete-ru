@@ -9,6 +9,7 @@ api_prefix = '/api/v1'
 api.add_resource(IndexResource, api_prefix + '/')
 api.add_resource(EnquetesResource, api_prefix + '/enquetes')
 api.add_resource(TotalEnqueteResource, api_prefix + '/enquetes/total')
+api.add_resource(TotalDateEnqueteResource, api_prefix + '/enquetes/total/<year>/<month>')
 api.add_resource(DateEnqueteResource, api_prefix + '/enquetes/<date>')
 api.add_resource(MealEnqueteResource, api_prefix + '/enquetes/<date>/<meal>')
 api.add_resource(ActiveEnqueteResource, api_prefix + '/enquetes/active')

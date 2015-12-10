@@ -73,7 +73,23 @@ class TotalEnqueteResource(Resource):
         totalEnquetesAnswers = []
         enquetes = Enquete.query.all()
         for enquete in enquetes:
-            data = None
+            data = enquete.to_json()
+            for enqueteAnswers in data['answers']:
+                totalEnquetesAnswers.append(enqueteAnswers)
+
+        answer.content = totalEnquetesAnswers;
+
+
+        return answer.to_json()
+
+
+class TotalDateEnqueteResource(Resource):
+
+    def get(self, year, month):
+        answer = Answer()
+        totalEnquetesAnswers = []
+        enquetes = Enquete.query.find_by_month(int(year), int(month))
+        for enquete in enquetes:
             data = enquete.to_json()
             for enqueteAnswers in data['answers']:
                 totalEnquetesAnswers.append(enqueteAnswers)

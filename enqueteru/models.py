@@ -1,6 +1,7 @@
 from enqueteru import db
 from utils import MealChecker
 from flask_mongoalchemy import BaseQuery
+from calendar import monthrange
 
 import datetime
 
@@ -29,6 +30,17 @@ class EnqueteQuery(BaseQuery):
             # print(str(int_meal) + " = " + enquete.get_meal() + " ?")
             if enquete.get_meal() == int_meal:
                 return enquete
+
+    def find_by_month(self, year, month):
+        monthRange = monthrange(year, month)
+        startMonth = datetime.datetime(year, month, monthRange[0], 0, 0, 0)
+        endMonth = datetime.datetime(year, month, monthRange[1], 0, 0, 0);
+        typedate = self.type.date;
+        enquetes = self.filter(typedate >= startMonth, typedate <= endMonth).all()
+        return enquetes
+
+
+
 
 class Enquete(db.Document):
     query_class = EnqueteQuery
