@@ -13,18 +13,18 @@ class Meal:
 
 
 class BreakfastMeal(Meal):
-    init_time = datetime.time(4, 0, 0)
-    end_time = datetime.time(6, 0, 0)
+    init_time = datetime.time(7, 0, 0)
+    end_time = datetime.time(10, 0, 0)
 
 
 class LunchMeal(Meal):
     init_time = datetime.time(11, 0, 0)
-    end_time = datetime.time(14, 0, 0)
+    end_time = datetime.time(15, 0, 0)
 
 
 class DinnerMeal(Meal):
-    init_time = datetime.time(1, 0, 0)
-    end_time = datetime.time(4, 0, 0)
+    init_time = datetime.time(17, 0, 0)
+    end_time = datetime.time(20, 0, 0)
 
 
 class MealChecker:
